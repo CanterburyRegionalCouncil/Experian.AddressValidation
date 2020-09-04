@@ -23,7 +23,10 @@ ContactDataServices.defaults = {
 		"locality",
 		"region",
 		"postal_code",
-		"country"
+		"country",
+		"building_number",
+		"street",
+		"sub_building"
 	]
 };
 
@@ -649,6 +652,18 @@ ContactDataServices.address = function(customOptions){
         instance.result.updateAddressLine("region", data.result.address.region, "address-line-input");
         instance.result.updateAddressLine("postal_code", data.result.address.postal_code, "address-line-input");
         instance.result.updateAddressLine("country", data.result.address.country, "address-line-input");
+        if (data.result.components.building)
+        {
+          instance.result.updateAddressLine("building_number", data.result.components.building.building_number, "address-line-input");
+        }
+        if (data.result.components.street)
+        {
+          instance.result.updateAddressLine("street", data.result.components.street.full_name, "address-line-input");
+        }
+        if (data.result.components.sub_building && data.result.components.sub_building.door)
+        {
+          instance.result.updateAddressLine("sub_building", data.result.components.sub_building.door.full_name, "address-line-input");
+        }
 
         // Hide country and address search fields (if they have a 'toggle' class)
         instance.result.hideSearchInputs();
@@ -944,7 +959,7 @@ ContactDataServices.address = function(customOptions){
       instance.request.currentRequest.setRequestHeader("auth-token", instance.token);
       instance.request.currentRequest.setRequestHeader("Content-Type", "application/json");
       instance.request.currentRequest.setRequestHeader("Accept", "application/json");
-
+      instance.request.currentRequest.setRequestHeader("Add-Components", "true");
       instance.request.currentRequest.onload = function(xhr) {
         if (instance.request.currentRequest.status >= 200 && instance.request.currentRequest.status < 400) {
           // Success!

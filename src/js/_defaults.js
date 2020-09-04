@@ -13,7 +13,10 @@ ContactDataServices.defaults = {
 		"locality",
 		"region",
 		"postal_code",
-		"country"
+		"country",
+		"building_number",
+		"street",
+		"sub_building"
 	]
 };
 
