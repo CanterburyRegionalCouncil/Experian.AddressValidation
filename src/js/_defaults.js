@@ -3,6 +3,7 @@ ContactDataServices.defaults = {
 	input: { placeholderText: "Start typing an address...", applyFocus: false },
 	formattedAddressContainer: { showHeading: false, headingType: "h3", validatedHeadingText: "Validated address", manualHeadingText: "Manual address entered"  },
 	searchAgain: { visible: true, text: "Search again"},
+	allowUseAddressEntered: true,
 	useAddressEnteredText: "<em>Enter address manually</em>",
 	useSpinner: false,
 	language: "en",
@@ -35,6 +36,7 @@ ContactDataServices.mergeDefaultOptions = function(customOptions){
 	instance.currentFormatUrl = "";
 	instance.applyFocus = (typeof instance.applyFocus !== "undefined") ? instance.applyFocus : ContactDataServices.defaults.input.applyFocus;
 	instance.placeholderText = instance.placeholderText || ContactDataServices.defaults.input.placeholderText;
+	instance.allowUseAddressEntered = (typeof instance.allowUseAddressEntered !== "undefined") ? instance.allowUseAddressEntered : ContactDataServices.defaults.allowUseAddressEntered;
 	instance.searchAgain = instance.searchAgain || {};
 	instance.searchAgain.visible = (typeof instance.searchAgain.visible !== "undefined") ? instance.searchAgain.visible : ContactDataServices.defaults.searchAgain.visible;
 	instance.searchAgain.text = instance.searchAgain.text || ContactDataServices.defaults.searchAgain.text;

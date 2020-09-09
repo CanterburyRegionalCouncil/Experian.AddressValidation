@@ -199,7 +199,10 @@ ContactDataServices.address = function(customOptions){
       instance.searchSpinner.hide();
 
       // Prepend an option for "use address entered"
-      instance.picklist.useAddressEntered.element = instance.picklist.useAddressEntered.element || instance.picklist.useAddressEntered.create();
+      if (instance.allowUseAddressEntered)
+      {
+        instance.picklist.useAddressEntered.element = instance.picklist.useAddressEntered.element || instance.picklist.useAddressEntered.create();
+      }
 
       if(instance.picklist.size > 0){
         // Fire an event before picklist is created
@@ -465,17 +468,20 @@ ContactDataServices.address = function(customOptions){
         instance.result.updateAddressLine("region", data.result.address.region, "address-line-input");
         instance.result.updateAddressLine("postal_code", data.result.address.postal_code, "address-line-input");
         instance.result.updateAddressLine("country", data.result.address.country, "address-line-input");
-        if (data.result.components.building)
+        if (data.result.components)
         {
-          instance.result.updateAddressLine("building_number", data.result.components.building.building_number, "address-line-input");
-        }
-        if (data.result.components.street)
-        {
-          instance.result.updateAddressLine("street", data.result.components.street.full_name, "address-line-input");
-        }
-        if (data.result.components.sub_building && data.result.components.sub_building.door)
-        {
-          instance.result.updateAddressLine("sub_building", data.result.components.sub_building.door.full_name, "address-line-input");
+          if (data.result.components.building)
+          {
+            instance.result.updateAddressLine("building_number", data.result.components.building.building_number, "address-line-input");
+          }
+          if (data.result.components.street)
+          {
+            instance.result.updateAddressLine("street", data.result.components.street.full_name, "address-line-input");
+          }
+          if (data.result.components.sub_building && data.result.components.sub_building.door)
+          {
+            instance.result.updateAddressLine("sub_building", data.result.components.sub_building.door.full_name, "address-line-input");
+          }
         }
 
         // Hide country and address search fields (if they have a 'toggle' class)
